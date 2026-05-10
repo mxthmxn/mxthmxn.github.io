@@ -35,7 +35,7 @@ export const site: SiteConfig = {
   tagline: "A slow notebook. Fragments, observations, things worth looking at twice.",
   avatarSize: 280,
   avatarUrl: `https://github.com/${handle}.png?size=280`,
-  email: `${handle}@proton.me`,
+  email: "myzvezduk0408@gmail.com",
   socials: [
     { key: "github", label: `@${handle}`, href: `https://github.com/${handle}` },
   ],
