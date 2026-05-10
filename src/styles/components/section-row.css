@@ -1,0 +1,33 @@
+.row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  padding: 48px var(--pad-x);
+  border-top: 1px solid var(--rule);
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.row-key {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--fg);
+  padding-top: 6px;
+}
+
+.row-key .dot { color: var(--burgundy); }
+
+.row-key .meta {
+  color: var(--mute);
+  font-size: 11px;
+  margin-top: 6px;
+  letter-spacing: .04em;
+}
+
+@media (max-width: 880px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 36px var(--pad-x);
+  }
+}

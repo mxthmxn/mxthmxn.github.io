@@ -1,0 +1,12 @@
+---
+import { formatYearMonth, toIsoDate } from "../../lib/date";
+import type { WriteupSummary } from "../../lib/types";
+
+interface Props { item: WriteupSummary }
+const { item } = Astro.props;
+---
+<a class="item" href={item.url}>
+  <span class="title">{item.title}</span>
+  <span class="meta-mono">{item.tag}</span>
+  <time class="meta-mono date" datetime={toIsoDate(item.date)}>{formatYearMonth(item.date)}</time>
+</a>

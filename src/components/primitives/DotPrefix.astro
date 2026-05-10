@@ -1,0 +1,10 @@
+---
+/**
+ * DotPrefix — the burgundy dot used as a section marker (`.intro`).
+ * Stays a primitive so the visual vocabulary is changed in exactly
+ * one place.
+ */
+interface Props { char?: string }
+const { char = "." } = Astro.props;
+---
+<span class="dot">{char}</span>

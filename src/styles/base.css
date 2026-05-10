@@ -1,0 +1,46 @@
+/**
+ * base.css — element & global resets.
+ * Knows nothing about specific components.
+ */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100%;
+  position: relative;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--burgundy); color: #fff; }
+
+a { color: inherit; }
+a:hover { color: var(--burgundy-hi); }
+
+.page {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  position: relative;
+  z-index: var(--z-content);
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* hide visually but keep for assistive tech */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

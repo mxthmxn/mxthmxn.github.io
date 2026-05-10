@@ -1,0 +1,63 @@
+/**
+ * tokens.css — single source of truth for design tokens.
+ * Edit a value here and every component picks it up.
+ */
+
+:root {
+  /* surfaces & rules */
+  --bg:           #0a0a0a;
+  --surface:      #111111;
+  --rule:         #232323;
+  --rule-hi:      #3a3a3a;
+
+  /* foreground */
+  --fg:           #ededed;
+  --fg-dim:       #b8b8b8;
+  --mute:         #6b6b6b;
+  --mute-2:       #4a4a4a;
+
+  /* accent (burgundy) */
+  --burgundy:     #7a1f2b;
+  --burgundy-hi:  #a52a3a;
+  --burgundy-dim: #3d0f15;
+
+  /* type */
+  --font-mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+  --fs-base:    14px;
+  --lh-base:    1.6;
+
+  /* layout */
+  --maxw:    1280px;
+  --pad-x:   64px;
+  --measure: 760px;
+
+  /* motion */
+  --reveal-duration: .6s;
+  --reveal-stagger:  40ms;
+  --hover-fast:      .2s;
+  --hover-med:       .25s;
+
+  /* z-layers */
+  --z-bg:       0;
+  --z-content:  1;
+  --z-overlay: 50;
+  --z-modal:  100;
+
+  /* shiki — synced to the design palette */
+  --astro-code-foreground:                var(--fg);
+  --astro-code-background:                var(--surface);
+  --astro-code-token-constant:            #c8a16d;
+  --astro-code-token-string:              #b8b8b8;
+  --astro-code-token-string-expression:   #b8b8b8;
+  --astro-code-token-comment:             var(--mute);
+  --astro-code-token-keyword:             var(--burgundy-hi);
+  --astro-code-token-parameter:           var(--fg-dim);
+  --astro-code-token-function:            #d8d8d8;
+  --astro-code-token-punctuation:         var(--mute);
+  --astro-code-token-link:                var(--burgundy-hi);
+}
+
+@media (max-width: 880px) {
+  :root { --pad-x: 28px; }
+}

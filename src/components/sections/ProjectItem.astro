@@ -1,0 +1,11 @@
+---
+import type { ProjectSummary } from "../../lib/types";
+
+interface Props { item: ProjectSummary }
+const { item } = Astro.props;
+---
+<a class="item" href={item.url}>
+  <span class="name">{item.name}</span>
+  <span class="desc">{item.description}</span>
+  <span class="arrow">→</span>
+</a>

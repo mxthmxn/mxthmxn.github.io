@@ -1,0 +1,13 @@
+---
+import { site } from "../../config/site";
+
+const year = new Date().getUTCFullYear();
+---
+<footer class="foot">
+  <span><span class="dot">·</span> {year}</span>
+  <div class="right">
+    {site.socials.map((s) => (
+      <a href={s.href} rel="me noopener">{s.key}</a>
+    ))}
+  </div>
+</footer>

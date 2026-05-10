@@ -1,0 +1,17 @@
+---
+import { site } from "../../config/site";
+---
+<section class="hero" id="intro">
+  <a href={`https://github.com/${site.handle}`} target="_blank" rel="noopener">
+    <img
+      class="avatar"
+      alt={`${site.handle} avatar`}
+      src={site.avatarUrl}
+      width={site.avatarSize}
+      height={site.avatarSize}
+      loading="eager"
+      decoding="async"
+    />
+  </a>
+  <p class="hero-text">{site.tagline}</p>
+</section>

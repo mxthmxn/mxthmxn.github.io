@@ -1,0 +1,35 @@
+.contact-list {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--fg-dim);
+  line-height: 2.1;
+}
+
+.contact-list .k {
+  color: var(--mute);
+  display: inline-block;
+  min-width: 90px;
+}
+
+.contact-list .v       { color: var(--burgundy); }
+.contact-list .v:hover { color: var(--burgundy-hi); }
+.contact-list .v.plain { color: var(--fg-dim); }
+
+.contact-list a.v {
+  text-decoration: none;
+  position: relative;
+  transition: color var(--hover-fast);
+}
+
+.contact-list a.v::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -1px;
+  height: 1px;
+  background: var(--burgundy-hi);
+  transition: right var(--hover-med) ease;
+}
+
+.contact-list a.v:hover::after { right: 0; }

@@ -1,0 +1,18 @@
+---
+import DotPrefix from "../primitives/DotPrefix.astro";
+import { site } from "../../config/site";
+
+interface Props {
+  /** Label for the leading section marker. Defaults to "index". */
+  current?: string;
+}
+const { current = "index" } = Astro.props;
+---
+<header class="topbar">
+  <span><DotPrefix />{current}</span>
+  <nav class="right" aria-label="Primary">
+    {site.nav.map((item) => (
+      <a href={item.href}><DotPrefix />{item.label}</a>
+    ))}
+  </nav>
+</header>

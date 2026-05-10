@@ -1,0 +1,49 @@
+/**
+ * background.css — ambient viewport-fixed layers.
+ * A faint dot grid + slow burgundy glow + radial vignette.
+ * All layers respect prefers-reduced-motion.
+ */
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-bg);
+}
+
+/* dot grid — static, very low contrast */
+body::before {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .035) 1px, transparent 1.2px);
+  background-size: 28px 28px;
+  background-position: 0 0;
+  mask-image: radial-gradient(ellipse at center, #000 50%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 50%, transparent 100%);
+}
+
+/* drifting burgundy glow */
+body::after {
+  background:
+    radial-gradient(600px 500px at var(--gx, 30%) var(--gy, 20%),
+                    rgba(122, 31, 43, .18), rgba(122, 31, 43, 0) 70%),
+    radial-gradient(800px 600px at var(--gx2, 80%) var(--gy2, 80%),
+                    rgba(122, 31, 43, .10), rgba(122, 31, 43, 0) 70%);
+  animation: drift 38s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  0%   { --gx: 22%; --gy: 18%; --gx2: 78%; --gy2: 82%; }
+  50%  { --gx: 38%; --gy: 30%; --gx2: 64%; --gy2: 68%; }
+  100% { --gx: 28%; --gy: 12%; --gx2: 86%; --gy2: 76%; }
+}
+
+@property --gx  { syntax: '<percentage>'; inherits: true; initial-value: 30%; }
+@property --gy  { syntax: '<percentage>'; inherits: true; initial-value: 20%; }
+@property --gx2 { syntax: '<percentage>'; inherits: true; initial-value: 80%; }
+@property --gy2 { syntax: '<percentage>'; inherits: true; initial-value: 80%; }
+
+@media (prefers-reduced-motion: reduce) {
+  body::after { animation: none; }
+}

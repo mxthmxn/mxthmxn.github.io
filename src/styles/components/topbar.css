@@ -1,0 +1,42 @@
+.topbar {
+  display: flex;
+  align-items: baseline;
+  padding: 40px var(--pad-x) 0;
+  font-size: 12px;
+  color: var(--mute);
+  letter-spacing: .04em;
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.topbar a { text-decoration: none; }
+.topbar .dot { color: var(--burgundy); }
+
+.topbar .right {
+  margin-left: auto;
+  display: flex;
+  gap: 24px;
+}
+
+.topbar .right a {
+  color: var(--fg-dim);
+  display: inline-flex;
+  align-items: baseline;
+  transition: color var(--hover-fast);
+}
+
+.topbar .right a .dot {
+  color: var(--burgundy);
+  transition: color var(--hover-fast), transform var(--hover-fast);
+  display: inline-block;
+}
+
+.topbar .right a:hover { color: var(--fg); }
+.topbar .right a:hover .dot {
+  color: var(--burgundy-hi);
+  transform: scale(1.4);
+}
+
+@media (max-width: 880px) {
+  .topbar .right { gap: 14px; }
+}

@@ -1,0 +1,49 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import TopBar from "../components/layout/TopBar.astro";
+import Footer from "../components/layout/Footer.astro";
+import { formatYearMonth, toIsoDate } from "../lib/date";
+import type { ContentKind } from "../lib/types";
+
+interface Props {
+  kind: ContentKind;
+  title: string;
+  date: Date;
+  tag?: string;
+  description?: string;
+  /** Extra className on <article>, e.g. "note". */
+  modifier?: string;
+}
+
+const { kind, title, date, tag, description, modifier } = Astro.props;
+const articleClass = ["article", modifier].filter(Boolean).join(" ");
+---
+<BaseLayout title={`${title} — ${kind}`} description={description ?? title}>
+  <div class="page">
+    <TopBar current={kind} />
+
+    <article class={articleClass}>
+      <header class="article-head reveal">
+        <div class="article-kicker">
+          <span><span class="dot">.</span>{kind}</span>
+          {tag && (
+            <>
+              <span class="sep">/</span>
+              <span>{tag}</span>
+            </>
+          )}
+          <span class="sep">·</span>
+          <time datetime={toIsoDate(date)}>{formatYearMonth(date)}</time>
+        </div>
+        <h1>{title}</h1>
+        {description && <p class="article-dek">{description}</p>}
+      </header>
+
+      <div class="prose">
+        <slot />
+      </div>
+    </article>
+
+    <Footer />
+  </div>
+</BaseLayout>

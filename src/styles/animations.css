@@ -1,0 +1,19 @@
+/**
+ * animations.css — reveal-on-scroll keyframes & fallbacks.
+ * Components opt in by adding the `reveal` class; reveal.ts
+ * adds `.in` when they enter the viewport.
+ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity   var(--reveal-duration) ease,
+      transform var(--reveal-duration) ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+}

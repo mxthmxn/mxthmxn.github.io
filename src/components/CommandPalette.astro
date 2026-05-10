@@ -1,0 +1,86 @@
+---
+/**
+ * CommandPalette — Cmd/Ctrl+K search modal.
+ *
+ * Builds a JSON index of all writeups/notes/projects at build time
+ * and inlines it into the page. The runtime (scripts/command-palette.ts)
+ * reads it and ranks via lib/search.
+ */
+
+import {
+  getWriteupSummaries,
+  getNoteSummaries,
+  getProjectSummaries,
+} from "../lib/content";
+import { formatYearMonth } from "../lib/date";
+import type { Searchable } from "../lib/search";
+
+interface PaletteEntry extends Searchable { href: string }
+
+const [w, n, p] = await Promise.all([
+  getWriteupSummaries(),
+  getNoteSummaries(),
+  getProjectSummaries(),
+]);
+
+const entries: PaletteEntry[] = [
+  ...w.map((x) => ({
+    id:    x.url,
+    href:  x.url,
+    kind:  "writeup",
+    title: x.title,
+    meta:  `${x.tag} · ${formatYearMonth(x.date)}`,
+  })),
+  ...n.map((x) => ({
+    id:    x.url,
+    href:  x.url,
+    kind:  "note",
+    title: x.body,
+    meta:  formatYearMonth(x.date),
+  })),
+  ...p.map((x) => ({
+    id:    x.url,
+    href:  x.url,
+    kind:  "project",
+    title: x.name,
+    meta:  x.description,
+  })),
+];
+---
+<div
+  class="cmdk-overlay"
+  id="cmdk"
+  data-open="false"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="cmdk-label"
+  hidden={false}
+>
+  <span id="cmdk-label" class="sr-only">Command palette</span>
+  <div class="cmdk-panel">
+    <div class="cmdk-input-row">
+      <span class="dot">.</span>
+      <input
+        class="cmdk-input"
+        id="cmdk-input"
+        type="text"
+        placeholder="search writeups, notes, projects…"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <span class="cmdk-hint">esc</span>
+    </div>
+    <ul class="cmdk-list" id="cmdk-list" role="listbox"></ul>
+  </div>
+</div>
+
+<script
+  is:inline
+  type="application/json"
+  id="cmdk-index"
+  set:html={JSON.stringify(entries)}
+></script>
+
+<script>
+  import "../scripts/command-palette";
+</script>

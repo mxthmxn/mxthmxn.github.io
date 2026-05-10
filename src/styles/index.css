@@ -1,0 +1,19 @@
+/**
+ * index.css — single entry point.
+ * Imports the design system in the order:
+ *   tokens → base → ambient → animations → components.
+ */
+
+@import "./tokens.css";
+@import "./base.css";
+@import "./background.css";
+@import "./animations.css";
+
+@import "./components/topbar.css";
+@import "./components/hero.css";
+@import "./components/section-row.css";
+@import "./components/list.css";
+@import "./components/contact.css";
+@import "./components/footer.css";
+@import "./components/article.css";
+@import "./components/command-palette.css";

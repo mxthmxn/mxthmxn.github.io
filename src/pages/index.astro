@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TopBar from "../components/layout/TopBar.astro";
+import Footer from "../components/layout/Footer.astro";
+import Hero from "../components/sections/Hero.astro";
+import SectionRow from "../components/sections/SectionRow.astro";
+import WriteupItem from "../components/sections/WriteupItem.astro";
+import NoteItem from "../components/sections/NoteItem.astro";
+import ProjectItem from "../components/sections/ProjectItem.astro";
+import ContactList from "../components/sections/ContactList.astro";
+import {
+  getWriteupSummaries,
+  getNoteSummaries,
+  getProjectSummaries,
+} from "../lib/content";
+import { site } from "../config/site";
+
+const [writeups, notes, projects] = await Promise.all([
+  getWriteupSummaries(),
+  getNoteSummaries(),
+  getProjectSummaries(),
+]);
+
+const entries = (n: number): string => `${n} ${n === 1 ? "entry" : "entries"}`;
+---
+<BaseLayout>
+  <div class="page" data-handle={site.handle}>
+    <TopBar />
+
+    <Hero />
+
+    <SectionRow
+      id="writeups"
+      label="writeups"
+      meta={entries(writeups.length)}
+      modifier="writeups"
+    >
+      {writeups.map((item) => <WriteupItem item={item} />)}
+    </SectionRow>
+
+    <SectionRow
+      id="notes"
+      label="notes"
+      meta={entries(notes.length)}
+      modifier="notes"
+    >
+      {notes.map((item) => <NoteItem item={item} />)}
+    </SectionRow>
+
+    <SectionRow
+      id="projects"
+      label="projects"
+      modifier="projects"
+    >
+      {projects.map((item) => <ProjectItem item={item} />)}
+    </SectionRow>
+
+    <SectionRow
+      id="contact"
+      label="contact"
+      wrapperClass="contact-list"
+    >
+      <ContactList />
+    </SectionRow>
+
+    <Footer />
+  </div>
+</BaseLayout>

@@ -1,0 +1,118 @@
+/**
+ * list.css — shared list styling and per-variant overrides.
+ * Variants opt in via class: .list.writeups / .list.notes / .list.projects
+ */
+
+.list { display: block; }
+
+.list a.item {
+  display: grid;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: inherit;
+  align-items: baseline;
+  position: relative;
+  transition:
+    background var(--hover-med) ease,
+    padding    var(--hover-med) ease;
+}
+
+.list a.item:last-child { border-bottom: none; }
+
+/* burgundy edge marker */
+.list a.item::before {
+  content: "";
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--burgundy);
+  transition: width var(--hover-med) ease;
+}
+
+.list a.item:hover {
+  background: linear-gradient(90deg, rgba(122, 31, 43, .08), transparent 60%);
+  padding-left: 16px;
+}
+.list a.item:hover::before { width: 12px; }
+.list a.item:hover .title  { color: #fff; }
+.list a.item:hover .arrow  { color: var(--burgundy); transform: translateX(3px); }
+
+.list .title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  transition: color var(--hover-fast);
+}
+
+.list .meta-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--mute);
+  letter-spacing: .02em;
+}
+
+.list .arrow {
+  color: var(--mute);
+  font-family: var(--font-mono);
+  transition: color var(--hover-fast), transform var(--hover-fast);
+}
+
+/* ── writeups: title | tag | date ─────────────────────────── */
+.list.writeups a.item { grid-template-columns: 1fr 140px 80px; }
+.list.writeups .meta-mono.date { justify-self: end; }
+
+/* ── notes: date | body (italic serif) ────────────────────── */
+.list.notes { display: grid; gap: 24px; }
+
+.list.notes .item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  padding: 0;
+  border: none;
+}
+
+.list.notes .item .date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--mute);
+  padding-top: 6px;
+}
+
+.list.notes .item .body {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--fg-dim);
+  font-size: 18px;
+  line-height: 1.7;
+  text-decoration: none;
+  display: block;
+}
+
+.list.notes .item .body:hover  { color: var(--fg); }
+.list.notes a.item.body-link  { padding: 6px 0; }
+.list.notes a.item.body-link:hover { padding-left: 16px; }
+
+/* ── projects: name | desc | arrow ────────────────────────── */
+.list.projects a.item {
+  grid-template-columns: 180px 1fr 60px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.list.projects .name { color: var(--fg); }
+.list.projects .desc { color: var(--fg-dim); font-size: 13px; }
+.list.projects .arrow { justify-self: end; }
+
+@media (max-width: 880px) {
+  .list.writeups a.item { grid-template-columns: 1fr; }
+  .list.writeups .meta-mono { font-size: 11px; }
+  .list.projects a.item { grid-template-columns: 1fr; }
+}

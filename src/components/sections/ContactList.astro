@@ -1,0 +1,20 @@
+---
+/**
+ * Renders the contact rows as a flat fragment, so the parent can
+ * supply the appropriate wrapper class (e.g. "contact-list") via
+ * SectionRow's `wrapperClass`.
+ */
+import { site } from "../../config/site";
+---
+<Fragment>
+  <div>
+    <span class="k">email</span>
+    <a class="v" href={`mailto:${site.email}`}>{site.email}</a>
+  </div>
+  {site.socials.map((s) => (
+    <div>
+      <span class="k">{s.key}</span>
+      <a class="v" href={s.href} rel="me noopener">{s.label}</a>
+    </div>
+  ))}
+</Fragment>

@@ -1,0 +1,11 @@
+---
+import { formatYearMonth, toIsoDate } from "../../lib/date";
+import type { NoteSummary } from "../../lib/types";
+
+interface Props { item: NoteSummary }
+const { item } = Astro.props;
+---
+<a class="item body-link" href={item.url}>
+  <time class="date" datetime={toIsoDate(item.date)}>{formatYearMonth(item.date)}</time>
+  <span class="body">{item.body}</span>
+</a>

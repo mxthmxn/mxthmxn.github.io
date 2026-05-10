@@ -1,0 +1,28 @@
+---
+import DotPrefix from "../primitives/DotPrefix.astro";
+
+interface Props {
+  /** Anchor id (used by topbar links). */
+  id: string;
+  /** Label shown next to the dot, e.g. "writeups". */
+  label: string;
+  /** Optional caption shown under the label, e.g. "3 entries". */
+  meta?: string;
+  /** Wrapper class for the slot content. Default "list". */
+  wrapperClass?: string;
+  /** Modifier appended to wrapperClass (writeups | notes | projects). */
+  modifier?: string;
+}
+
+const { id, label, meta, wrapperClass = "list", modifier } = Astro.props;
+const innerCls = [wrapperClass, modifier].filter(Boolean).join(" ");
+---
+<section class="row reveal" id={id}>
+  <div class="row-key">
+    <DotPrefix />{label}
+    {meta && <div class="meta">{meta}</div>}
+  </div>
+  <div class={innerCls}>
+    <slot />
+  </div>
+</section>
